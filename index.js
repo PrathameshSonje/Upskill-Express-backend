@@ -5,6 +5,7 @@ const adminRouter = require("./routes/admin");
 const userRouter = require("./routes/user");
 const path = require("path");
 const app = express();
+const dotenv= require('dotenv').config()
 
 app.use(cors());
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use("/*", (req, res) => {
 
 // Connect to MongoDB
 // DONT MISUSE THIS THANKYOU!!
-mongoose.connect('mongodb+srv://prathameshsonje147:AG7vbEJc63L8cvg9@cluster0.58ck59i.mongodb.net/courses', { useNewUrlParser: true, useUnifiedTopology: true, dbName: "courses" });
+const MONGODB_URL  = process.env.MONGODB_URL
+mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true, dbName: "courses" });
 
 app.listen(3001, () => console.log('Server running on port 3001'));
